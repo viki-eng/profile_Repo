@@ -1,0 +1,21 @@
+name: StaticShop CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 24f2004625@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
+
+      - name: Finish
+        run: echo "Workflow completed"
