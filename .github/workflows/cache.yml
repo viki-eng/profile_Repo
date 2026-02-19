@@ -1,0 +1,36 @@
+name: Cache CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: cache-0ff4506
+
+      - name: prime-cache-0ff4506
+        run: |
+          if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit!"
+          else
+            echo "Cache miss!"
+          fi
+
+      - name: Create dummy dependency
+        run: |
+          mkdir -p node_modules
+          echo "dummy" > node_modules/file.txt
